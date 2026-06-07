@@ -260,6 +260,32 @@
     .gallery-item {
         @apply ring-1 ring-slate-100;
     }
+
+    /* ── شريط تقدّم التمرير ── */
+    #scroll-progress {
+        @apply fixed inset-x-0 top-0 z-[60] h-1 w-0 bg-gradient-to-l from-accent to-accent-hover;
+        transition: width 0.12s linear;
+    }
+
+    /* ── زر العودة للأعلى ── */
+    #back-to-top {
+        @apply pointer-events-none translate-y-3 opacity-0 transition duration-300;
+    }
+
+    #back-to-top.is-visible {
+        @apply pointer-events-auto translate-y-0 opacity-100;
+    }
+
+    /* ── لمسة hover ذهبية على البطاقات ── */
+    .program-card:hover,
+    .testimonial-card:hover {
+        @apply ring-2 ring-accent/40;
+    }
+
+    /* ── عقدة الخط الزمني للقبول ── */
+    .timeline-connector {
+        @apply w-0.5 flex-1 rounded-full bg-gradient-to-b from-brand/40 to-brand/5;
+    }
 }
 
 [data-reveal] {

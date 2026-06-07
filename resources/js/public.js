@@ -139,10 +139,36 @@ function initFaqAccordion() {
     });
 }
 
+function initScrollProgress() {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+
+    const update = () => {
+        const el = document.documentElement;
+        const max = el.scrollHeight - el.clientHeight;
+        bar.style.width = max > 0 ? `${(el.scrollTop / max) * 100}%` : '0%';
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+}
+
+function initBackToTop() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    const toggle = () => btn.classList.toggle('is-visible', window.scrollY > 500);
+    toggle();
+    window.addEventListener('scroll', toggle, { passive: true });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initRevealOnScroll();
     initCountUp();
     initNavbarScroll();
     initMobileMenu();
     initFaqAccordion();
+    initScrollProgress();
+    initBackToTop();
 });

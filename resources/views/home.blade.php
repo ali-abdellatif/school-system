@@ -119,7 +119,7 @@
                 </x-section-heading>
                 <x-button variant="brand" href="{{ route('apply') }}" class="mt-8">ابدأ التقديم الآن</x-button>
             </div>
-            <div data-reveal data-reveal-delay="150" class="grid gap-4">
+            <div data-reveal data-reveal-delay="150">
                 @php
                     $steps = [
                         ['n' => '1', 'title' => 'إدخال بيانات الطالب', 'desc' => 'الاسم، تاريخ الميلاد، الصف المطلوب، والمدرسة السابقة.'],
@@ -128,9 +128,14 @@
                     ];
                 @endphp
                 @foreach ($steps as $step)
-                    <div class="admission-step">
-                        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand text-xl font-black text-white">{{ $step['n'] }}</span>
-                        <div>
+                    <div class="flex gap-5">
+                        <div class="flex flex-col items-center">
+                            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand text-xl font-black text-white shadow-lg shadow-brand/25 ring-4 ring-brand/10">{{ $step['n'] }}</span>
+                            @unless ($loop->last)
+                                <span class="timeline-connector my-2"></span>
+                            @endunless
+                        </div>
+                        <div class="pt-2.5 {{ $loop->last ? '' : 'pb-8' }}">
                             <h3 class="font-black text-brand">{{ $step['title'] }}</h3>
                             <p class="mt-1 text-sm font-normal leading-7 text-muted">{{ $step['desc'] }}</p>
                         </div>
