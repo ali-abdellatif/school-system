@@ -1,0 +1,332 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    ::selection {
+        @apply bg-accent text-brand;
+    }
+}
+
+@layer components {
+    .section-eyebrow {
+        @apply inline-flex rounded-full bg-accent-muted px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand;
+    }
+
+    .section-title {
+        @apply font-display text-3xl font-black text-brand md:text-4xl;
+    }
+
+    .feature-tile {
+        @apply rounded-2xl border border-slate-100 bg-surface p-5 transition hover:-translate-y-0.5 hover:shadow-lg;
+    }
+
+    .feature-tile h3 {
+        @apply mt-3 font-black text-brand;
+    }
+
+    .feature-tile p {
+        @apply mt-2 text-sm leading-7 text-muted;
+    }
+
+    .feature-icon {
+        @apply flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-sm font-black text-white;
+    }
+
+    .form-label {
+        @apply mb-2 block text-sm font-bold text-slate-700;
+    }
+
+    .form-label span {
+        @apply text-red-500;
+    }
+
+    .form-input {
+        @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm transition placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20;
+    }
+
+    .form-error {
+        @apply mt-1.5 block text-xs font-bold text-red-600;
+    }
+
+    .form-section-title {
+        @apply text-2xl font-black text-brand;
+    }
+
+    .form-section-subtitle {
+        @apply mt-1 text-sm leading-7 text-muted;
+    }
+
+    .review-card {
+        @apply rounded-2xl border border-slate-100 bg-slate-50 p-5;
+    }
+
+    .review-card h3 {
+        @apply mb-4 font-black text-brand;
+    }
+
+    .review-card dl {
+        @apply grid gap-3 sm:grid-cols-2;
+    }
+
+    .review-card dt {
+        @apply text-xs font-bold text-slate-400;
+    }
+
+    .review-card dd {
+        @apply text-sm font-bold text-slate-700;
+    }
+
+    .sidebar-step {
+        @apply flex gap-3 rounded-xl bg-slate-50 p-4;
+    }
+
+    .sidebar-step span {
+        @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand text-sm font-black text-white;
+    }
+
+    .sidebar-step p {
+        @apply text-sm leading-7 text-slate-600;
+    }
+
+    .nav-link {
+        @apply relative font-bold text-slate-600 transition hover:text-brand focus:outline-none focus:ring-2 focus:ring-brand/30 focus:ring-offset-2 rounded-lg px-1;
+    }
+
+    .nav-link.is-active {
+        @apply text-brand;
+    }
+
+    .nav-link.is-active::after {
+        content: '';
+        @apply absolute -bottom-1 start-0 h-0.5 w-full rounded-full bg-accent;
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center rounded-2xl px-7 py-3.5 text-center font-black transition focus:outline-none focus:ring-2 focus:ring-offset-2;
+    }
+
+    .btn-primary {
+        @apply btn bg-accent text-brand shadow-lg shadow-accent/20 hover:bg-accent-hover focus:ring-accent;
+    }
+
+    .btn-brand {
+        @apply btn bg-brand text-white shadow-lg shadow-brand/20 hover:bg-brand-dark focus:ring-brand;
+    }
+
+    .btn-outline {
+        @apply btn border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-white/20 focus:ring-white/40;
+    }
+
+    .btn-ghost {
+        @apply btn bg-slate-100 text-brand hover:bg-slate-200 focus:ring-brand;
+    }
+
+    .btn-success {
+        @apply btn bg-emerald-600 text-white shadow-lg shadow-emerald-600/20 hover:bg-emerald-700 focus:ring-emerald-500;
+    }
+
+    /* ── Page layout ── */
+    .page-shell {
+        @apply bg-gradient-to-b from-slate-100/80 via-surface to-surface;
+    }
+
+    .page-hero {
+        @apply border-b border-brand-dark/20;
+    }
+
+    .page-content {
+        @apply mx-auto max-w-7xl px-4 pb-16 pt-10 md:pt-14;
+    }
+
+    .content-card {
+        @apply rounded-[2rem] border border-slate-100/80 bg-white shadow-xl shadow-slate-200/60 ring-1 ring-slate-100;
+    }
+
+    .content-card-header {
+        @apply border-b border-slate-100 px-6 py-6 md:px-8;
+    }
+
+    .content-card-body {
+        @apply p-6 md:p-8;
+    }
+
+    .info-panel {
+        @apply content-card p-6 lg:sticky lg:top-28;
+    }
+
+    .info-tip {
+        @apply rounded-2xl border border-brand/10 bg-brand/5 p-5 text-sm leading-7 text-slate-600;
+    }
+
+    /* ── Step wizard ── */
+    .step-circle {
+        @apply flex h-12 w-12 items-center justify-center rounded-2xl border-2 text-sm font-black transition-all duration-300;
+    }
+
+    .step-circle--active {
+        @apply border-brand bg-brand text-white shadow-lg shadow-brand/25 ring-4 ring-brand/10;
+    }
+
+    .step-circle--done {
+        @apply border-emerald-500 bg-emerald-500 text-white shadow-md shadow-emerald-500/20;
+    }
+
+    .step-circle--pending {
+        @apply border-slate-200 bg-white text-slate-400;
+    }
+
+    .step-connector {
+        @apply h-1 flex-1 rounded-full bg-slate-200 transition-colors duration-300;
+    }
+
+    .step-connector--done {
+        @apply bg-emerald-500;
+    }
+
+    /* ── Status badges ── */
+    .status-badge {
+        @apply inline-flex rounded-full px-5 py-2 text-sm font-black ring-1;
+    }
+
+    .status-badge--pending {
+        @apply bg-amber-50 text-amber-800 ring-amber-200;
+    }
+
+    .status-badge--reviewing {
+        @apply bg-blue-50 text-blue-800 ring-blue-200;
+    }
+
+    .status-badge--approved {
+        @apply bg-emerald-50 text-emerald-800 ring-emerald-200;
+    }
+
+    .status-badge--rejected {
+        @apply bg-red-50 text-red-800 ring-red-200;
+    }
+
+    /* ── Empty / success states ── */
+    .state-icon {
+        @apply mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full;
+    }
+
+    .state-icon--success {
+        @apply bg-emerald-100 text-emerald-600;
+    }
+
+    .state-icon--error {
+        @apply bg-red-100 text-red-500;
+    }
+
+    .state-icon--waiting {
+        @apply bg-accent-muted text-amber-600;
+    }
+
+    /* ── Home page ── */
+    .home-hero {
+        @apply relative isolate min-h-[calc(100vh-112px)] overflow-hidden bg-brand text-white;
+    }
+
+    .program-card {
+        @apply content-card overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-slate-200/80;
+    }
+
+    .service-card {
+        @apply rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur transition duration-300 hover:border-white/25 hover:bg-white/15;
+    }
+
+    .testimonial-card {
+        @apply content-card p-7 transition duration-300 hover:-translate-y-0.5 hover:shadow-2xl;
+    }
+
+    .admission-step {
+        @apply content-card flex gap-4 p-6 transition duration-300 hover:-translate-y-0.5;
+    }
+
+    /* ── FAQ ── */
+    .faq-item.is-open .faq-panel {
+        @apply block;
+    }
+
+    .faq-item.is-open .faq-icon {
+        @apply rotate-45 bg-brand text-white;
+    }
+
+    /* ── Gallery ── */
+    .gallery-item {
+        @apply ring-1 ring-slate-100;
+    }
+}
+
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+[data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+#main-nav {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+#main-nav.nav-scrolled {
+    @apply bg-brand-dark/90 shadow-xl;
+    backdrop-filter: blur(12px);
+}
+
+#main-nav.nav-scrolled .nav-link {
+    @apply text-blue-100;
+}
+
+#main-nav.nav-scrolled .nav-link.is-active,
+#main-nav.nav-scrolled .nav-link:hover {
+    @apply text-amber-300;
+}
+
+.hero-pattern {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+
+.wa-float {
+    animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-slate-100;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-brand;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-dark;
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="EC*() E/13J)">
+  <defs>
+    <linearGradient id="libBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#libBg)"/>
+  <rect x="100" y="120" width="600" height="360" rx="20" fill="#16304d"/>
+  <rect x="140" y="180" width="70" height="220" rx="6" fill="#fbbf24"/>
+  <rect x="230" y="180" width="70" height="220" rx="6" fill="#ffffff" opacity="0.9"/>
+  <rect x="320" y="180" width="70" height="220" rx="6" fill="#2d5986"/>
+  <rect x="410" y="180" width="70" height="220" rx="6" fill="#fbbf24"/>
+  <rect x="500" y="180" width="70" height="220" rx="6" fill="#ffffff" opacity="0.9"/>
+  <rect x="590" y="180" width="70" height="220" rx="6" fill="#2d5986"/>
+</svg>
