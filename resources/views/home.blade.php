@@ -52,8 +52,8 @@
     </section>
 
     <section class="mx-auto max-w-7xl px-4 py-20">
-        <div class="grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
-            <div data-reveal>
+        <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div data-reveal class="lg:col-span-8">
                 <x-section-heading eyebrow="عن المدرسة" title="بيئة تعليمية ترى الطالب كاملا">
                     نؤمن أن المدرسة ليست مكانا للدروس فقط، بل مساحة لاكتشاف قدرات الطالب وبناء شخصيته. لذلك نجمع بين جودة التعليم، الأنشطة، المتابعة النفسية، والتواصل المستمر مع الأسرة.
                 </x-section-heading>
@@ -61,17 +61,23 @@
                     <x-feature-tile icon="01" title="متابعة قريبة">تقارير منتظمة وتواصل واضح مع ولي الأمر.</x-feature-tile>
                     <x-feature-tile icon="02" title="تعلم نشط">أنشطة ومشروعات تساعد الطالب على الفهم والتطبيق.</x-feature-tile>
                 </div>
-                <div class="mt-8 flex flex-wrap gap-3">
-                    @foreach (school('accreditations', []) as $badge)
-                        <span class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-brand">
-                            {{ is_array($badge) ? ($badge['badge'] ?? reset($badge)) : $badge }}
-                        </span>
-                    @endforeach
-                </div>
+                @php $accreditations = school('accreditations', []); @endphp
+                @if (count($accreditations))
+                    <div class="marquee mt-8">
+                        <div class="marquee-track">
+                            @foreach (array_merge($accreditations, $accreditations) as $j => $badge)
+                                <span @class(['flex shrink-0 items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-brand']) @if ($j >= count($accreditations)) aria-hidden="true" @endif>
+                                    <svg class="h-4 w-4 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    {{ is_array($badge) ? ($badge['badge'] ?? reset($badge)) : $badge }}
+                                </span>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
             </div>
-            <div data-reveal data-reveal-delay="150" class="grid grid-cols-2 gap-4">
-                <img src="{{ school('images.classroom') }}" alt="فصل دراسي حديث" class="h-72 w-full rounded-3xl object-cover shadow-xl">
-                <img src="{{ school('images.lab') }}" alt="مختبر مدرسي" class="mt-10 h-72 w-full rounded-3xl object-cover shadow-xl">
+            <div data-reveal data-reveal-delay="150" class="grid grid-cols-2 gap-4 lg:col-span-4">
+                <img src="{{ school('images.classroom') }}" alt="فصل دراسي حديث" loading="lazy" class="h-96 w-full rounded-3xl object-cover shadow-xl">
+                <img src="{{ school('images.lab') }}" alt="مختبر مدرسي" loading="lazy" class="mt-10 h-96 w-full rounded-3xl object-cover shadow-xl">
             </div>
         </div>
     </section>

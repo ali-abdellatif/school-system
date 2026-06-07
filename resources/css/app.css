@@ -286,6 +286,78 @@
     .timeline-connector {
         @apply w-0.5 flex-1 rounded-full bg-gradient-to-b from-brand/40 to-brand/5;
     }
+
+    /* ── معرض الصور: Lightbox ── */
+    .lightbox {
+        @apply fixed inset-0 z-[70] flex items-center justify-center bg-brand-dark/90 p-4 opacity-0 transition duration-300;
+        pointer-events: none;
+        backdrop-filter: blur(6px);
+    }
+
+    .lightbox.is-open {
+        @apply opacity-100;
+        pointer-events: auto;
+    }
+
+    .lightbox img {
+        @apply max-h-[80vh] w-auto rounded-2xl shadow-2xl;
+    }
+
+    .lightbox-caption {
+        @apply mt-4 text-center font-display text-lg font-black text-white;
+    }
+
+    /* ── شريط الاعتمادات المتحرك ── */
+    .marquee {
+        @apply overflow-hidden;
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .marquee-track {
+        @apply flex w-max gap-3;
+        animation: marquee 30s linear infinite;
+    }
+
+    .marquee:hover .marquee-track {
+        animation-play-state: paused;
+    }
+
+    /* ── لمعان خفيف على أزرار CTA ── */
+    .btn-primary,
+    .btn-brand {
+        @apply relative overflow-hidden;
+    }
+
+    .btn-primary::after,
+    .btn-brand::after {
+        content: '';
+        @apply pointer-events-none absolute inset-0 -translate-x-full;
+        background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.35), transparent 70%);
+        transition: transform 0.7s ease;
+    }
+
+    .btn-primary:hover::after,
+    .btn-brand:hover::after {
+        @apply translate-x-full;
+    }
+}
+
+@keyframes marquee {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+        animation: none;
+        flex-wrap: wrap;
+    }
+    .btn-primary::after,
+    .btn-brand::after {
+        display: none;
+    }
 }
 
 [data-reveal] {
