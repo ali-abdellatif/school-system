@@ -6,11 +6,13 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use App\Filament\Widgets\ApplicationsChartWidget;
 use App\Filament\Widgets\ApplicationsOverviewWidget;
+use App\Filament\Widgets\DashboardWelcomeWidget;
 use App\Filament\Widgets\SchoolOverviewWidget;
 use App\Support\Filament\ConfiguresSchoolPanel;
 use Filament\Widgets\AccountWidget;
@@ -40,10 +42,25 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
+                DashboardWelcomeWidget::class,
                 SchoolOverviewWidget::class,
                 ApplicationsOverviewWidget::class,
                 ApplicationsChartWidget::class,
                 AccountWidget::class,
+            ])
+            // ملاحظة: Filament لا يسمح بوجود أيقونة للمجموعة وأيقونات لعناصرها معًا.
+            // اخترنا الإبقاء على أيقونات العناصر (لكل مورد أيقونته)، لذا لا نضع أيقونة للمجموعة.
+            ->navigationGroups([
+                NavigationGroup::make('القبول والتسجيل')
+                    ->collapsed(false),
+                NavigationGroup::make('الهيكل الأكاديمي')
+                    ->collapsed(true),
+                NavigationGroup::make('المعلمون والمواد')
+                    ->collapsed(true),
+                NavigationGroup::make('إدارة الوصول')
+                    ->collapsed(true),
+                NavigationGroup::make('إعدادات الموقع')
+                    ->collapsed(true),
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -57,7 +74,10 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->plugins([
-                FilamentShieldPlugin::make(),
+                FilamentShieldPlugin::make()
+                    ->navigationGroup('إدارة الوصول')
+                    ->navigationSort(1)
+                    ->navigationIcon('heroicon-o-shield-check'),
             ])
             ->authMiddleware([
                 Authenticate::class,

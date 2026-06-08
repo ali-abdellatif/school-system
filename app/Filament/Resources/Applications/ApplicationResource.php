@@ -20,9 +20,11 @@ class ApplicationResource extends Resource
 {
     protected static ?string $model = Application::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-list';
 
-    protected static string|UnitEnum|null $navigationGroup = 'إدارة القبول';
+    protected static string|UnitEnum|null $navigationGroup = 'القبول والتسجيل';
+
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationLabel = 'طلبات القبول';
 

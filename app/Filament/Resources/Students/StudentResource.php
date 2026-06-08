@@ -22,9 +22,11 @@ class StudentResource extends Resource
 {
     protected static ?string $model = Student::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-users';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
 
-    protected static string|UnitEnum|null $navigationGroup = 'إدارة الطلاب';
+    protected static string|UnitEnum|null $navigationGroup = 'القبول والتسجيل';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationLabel = 'الطلاب';
 

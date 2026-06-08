@@ -18,9 +18,9 @@ class AcademicYearResource extends Resource
 {
     protected static ?string $model = AcademicYear::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-calendar';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-calendar-days';
 
-    protected static string|UnitEnum|null $navigationGroup = 'الإعدادات الأكاديمية';
+    protected static string|UnitEnum|null $navigationGroup = 'الهيكل الأكاديمي';
 
     protected static ?string $navigationLabel = 'السنوات الدراسية';
 

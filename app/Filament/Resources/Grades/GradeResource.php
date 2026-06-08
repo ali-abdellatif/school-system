@@ -18,9 +18,9 @@ class GradeResource extends Resource
 {
     protected static ?string $model = Grade::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static string|UnitEnum|null $navigationGroup = 'الإعدادات الأكاديمية';
+    protected static string|UnitEnum|null $navigationGroup = 'الهيكل الأكاديمي';
 
     protected static ?string $navigationLabel = 'الصفوف الدراسية';
 
