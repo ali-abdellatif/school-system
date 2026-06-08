@@ -8,6 +8,10 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use App\Models\AcademicYear;
+use App\Models\Section;
+use App\Models\Student;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
@@ -127,6 +131,45 @@ class ApplicationsTable
                         Notification::make()
                             ->title('تم رفض الطلب')
                             ->danger()
+                            ->send();
+                    }),
+
+                Action::make('convertToStudent')
+                    ->label('تحويل لطالب')
+                    ->icon('heroicon-o-user-plus')
+                    ->color('primary')
+                    ->modalHeading('تحويل الطلب إلى طالب')
+                    ->modalSubmitActionLabel('تحويل')
+                    ->visible(fn ($record): bool => $record->status === 'approved'
+                        && ! Student::query()->where('application_id', $record->id)->exists())
+                    ->schema([
+                        Select::make('section_id')
+                            ->label('الفصل')
+                            ->options(fn () => Section::query()->with('grade')->get()
+                                ->mapWithKeys(fn (Section $s) => [$s->id => trim(($s->grade?->name ?? '') . ' - ' . $s->name)]))
+                            ->required()
+                            ->searchable(),
+                    ])
+                    ->action(function (array $data, $record): void {
+                        $section = Section::find($data['section_id']);
+
+                        $student = Student::create([
+                            'first_name' => $record->first_name,
+                            'last_name' => $record->last_name,
+                            'birth_date' => $record->birth_date,
+                            'gender' => $record->gender,
+                            'address' => $record->address,
+                            'phone' => $record->parent_phone,
+                            'status' => 'active',
+                            'section_id' => $section?->id,
+                            'academic_year_id' => $section?->academic_year_id ?? AcademicYear::current()->value('id'),
+                            'application_id' => $record->id,
+                        ]);
+
+                        Notification::make()
+                            ->title('تم تحويل الطلب إلى طالب بنجاح')
+                            ->body("رقم الطالب: #{$student->id}")
+                            ->success()
                             ->send();
                     }),
             ])

@@ -11,6 +11,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use App\Filament\Widgets\ApplicationsChartWidget;
 use App\Filament\Widgets\ApplicationsOverviewWidget;
+use App\Filament\Widgets\SchoolOverviewWidget;
 use App\Support\Filament\ConfiguresSchoolPanel;
 use Filament\Widgets\AccountWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -39,6 +40,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
+                SchoolOverviewWidget::class,
                 ApplicationsOverviewWidget::class,
                 ApplicationsChartWidget::class,
                 AccountWidget::class,
