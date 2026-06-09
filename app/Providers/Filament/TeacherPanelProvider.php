@@ -27,6 +27,7 @@ class TeacherPanelProvider extends PanelProvider
         return $this->configureSchoolBrand($panel)
             ->id('teacher')
             ->path('teacher')
+            ->login()
             ->discoverResources(in: app_path('Filament/Teacher/Resources'), for: 'App\Filament\Teacher\Resources')
             ->discoverPages(in: app_path('Filament/Teacher/Pages'), for: 'App\Filament\Teacher\Pages')
             ->pages([
@@ -34,7 +35,9 @@ class TeacherPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Teacher/Widgets'), for: 'App\Filament\Teacher\Widgets')
             ->widgets([
-                AccountWidget::class,
+                \App\Filament\Teacher\Widgets\TeacherGreetingWidget::class,
+                \App\Filament\Teacher\Widgets\TeacherStatsWidget::class,
+                \App\Filament\Teacher\Widgets\MyClassesWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -49,6 +52,7 @@ class TeacherPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                'teacher',
             ]);
     }
 }

@@ -73,6 +73,26 @@ class Teacher extends Model
         return $query->where('status', 'active');
     }
 
+    /** معرّفات الفصول المُعيّن عليها المعلم. */
+    public function assignedSectionIds(): array
+    {
+        return \Illuminate\Support\Facades\DB::table('teacher_section')
+            ->where('teacher_id', $this->id)
+            ->distinct()
+            ->pluck('section_id')
+            ->all();
+    }
+
+    /** معرّفات المواد التي يُدرّسها المعلم (من التعيينات). */
+    public function assignedSubjectIds(): array
+    {
+        return \Illuminate\Support\Facades\DB::table('teacher_section')
+            ->where('teacher_id', $this->id)
+            ->distinct()
+            ->pluck('subject_id')
+            ->all();
+    }
+
     protected static function booted(): void
     {
         // توليد رقم الموظف تلقائيًا: EMP-001, EMP-002 ...

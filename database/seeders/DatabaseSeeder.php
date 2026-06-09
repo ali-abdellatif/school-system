@@ -53,5 +53,8 @@ class DatabaseSeeder extends Seeder
                 );
             }
         }
+
+        // حسابات تجريبية لبوابتي المعلم وولي الأمر
+        $this->call(DemoPortalsSeeder::class);
     }
 }

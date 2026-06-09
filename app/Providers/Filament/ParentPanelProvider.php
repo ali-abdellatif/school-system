@@ -6,11 +6,11 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use App\Support\Filament\ConfiguresSchoolPanel;
-use Filament\Widgets\AccountWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -28,6 +28,7 @@ class ParentPanelProvider extends PanelProvider
         return $this->configureSchoolBrand($panel)
             ->id('parent')
             ->path('parent')
+            ->login()
             ->discoverResources(in: app_path('Filament/Parent/Resources'), for: 'App\Filament\Parent\Resources')
             ->discoverPages(in: app_path('Filament/Parent/Pages'), for: 'App\Filament\Parent\Pages')
             ->pages([
@@ -35,7 +36,12 @@ class ParentPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Parent/Widgets'), for: 'App\Filament\Parent\Widgets')
             ->widgets([
-                AccountWidget::class,
+                \App\Filament\Parent\Widgets\ParentWelcomeWidget::class,
+                \App\Filament\Parent\Widgets\MyChildrenWidget::class,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make('متابعة أبنائي')->collapsed(false),
+                NavigationGroup::make('التواصل')->collapsed(false),
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -50,6 +56,7 @@ class ParentPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                'parent',
             ]);
     }
 }
