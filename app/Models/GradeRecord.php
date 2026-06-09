@@ -9,6 +9,7 @@ class GradeRecord extends Model
 {
     protected $fillable = [
         'student_id',
+        'subject_id',
         'subject',
         'score',
         'max_score',
@@ -26,5 +27,10 @@ class GradeRecord extends Model
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
+    }
+
+    public function subject(): BelongsTo
+    {
+        return $this->belongsTo(Subject::class);
     }
 }

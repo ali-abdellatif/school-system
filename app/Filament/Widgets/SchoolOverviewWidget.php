@@ -6,6 +6,8 @@ use App\Models\AcademicYear;
 use App\Models\Application;
 use App\Models\Section;
 use App\Models\Student;
+use App\Models\Subject;
+use App\Models\Teacher;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -35,6 +37,16 @@ class SchoolOverviewWidget extends StatsOverviewWidget
                 ->description('السنة المفعّلة')
                 ->icon('heroicon-o-calendar')
                 ->color('primary'),
+
+            Stat::make('المعلمون النشطون', Teacher::query()->where('status', 'active')->count())
+                ->description('عدد المعلمين النشطين')
+                ->icon('heroicon-o-identification')
+                ->color('success'),
+
+            Stat::make('المواد الدراسية', Subject::query()->count())
+                ->description('إجمالي المواد')
+                ->icon('heroicon-o-book-open')
+                ->color('info'),
         ];
     }
 }
