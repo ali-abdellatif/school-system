@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Students\Tables;
 
+use App\Filament\Pages\StudentReport;
 use App\Models\Grade;
 use App\Models\Section;
 use App\Models\Student;
@@ -113,6 +114,11 @@ class StudentsTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                Action::make('report')
+                    ->label('التقرير الأكاديمي')
+                    ->icon('heroicon-o-document-chart-bar')
+                    ->color('info')
+                    ->url(fn (Student $record): string => StudentReport::getUrl(['student' => $record->id])),
                 Action::make('transfer')
                     ->label('تحويل طالب')
                     ->icon('heroicon-o-arrows-right-left')

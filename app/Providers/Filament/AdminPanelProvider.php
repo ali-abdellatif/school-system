@@ -12,6 +12,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use App\Filament\Widgets\ApplicationsChartWidget;
 use App\Filament\Widgets\ApplicationsOverviewWidget;
+use App\Filament\Widgets\AttendanceTodayWidget;
 use App\Filament\Widgets\DashboardWelcomeWidget;
 use App\Filament\Widgets\SchoolOverviewWidget;
 use App\Support\Filament\ConfiguresSchoolPanel;
@@ -44,6 +45,7 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 DashboardWelcomeWidget::class,
                 SchoolOverviewWidget::class,
+                AttendanceTodayWidget::class,
                 ApplicationsOverviewWidget::class,
                 ApplicationsChartWidget::class,
                 AccountWidget::class,
@@ -56,6 +58,8 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('الهيكل الأكاديمي')
                     ->collapsed(true),
                 NavigationGroup::make('المعلمون والمواد')
+                    ->collapsed(true),
+                NavigationGroup::make('الحضور والدرجات')
                     ->collapsed(true),
                 NavigationGroup::make('إدارة الوصول')
                     ->collapsed(true),
